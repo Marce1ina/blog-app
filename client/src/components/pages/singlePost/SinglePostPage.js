@@ -1,9 +1,6 @@
 import React from "react";
+import SinglePost from "../../features/singlePost/SinglePostContainer";
 
-const SinglePostPage = () => (
-    <div>
-        <h1>Single Post</h1>
-    </div>
-);
+const SinglePostPage = ({ match }) => <SinglePost postId={match.params.id} />;
 
 export default SinglePostPage;
