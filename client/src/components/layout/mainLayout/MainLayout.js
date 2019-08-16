@@ -1,10 +1,13 @@
 import React from "react";
+import PageContainer from "../PageContainer/PageContainer";
 import NavBar from "../../features/navBar/NavBar";
 
 const MainLayout = ({ children }) => (
     <div>
-        <NavBar />
-        {children}
+        <PageContainer>
+            <NavBar />
+            {children}
+        </PageContainer>
     </div>
 );
 
