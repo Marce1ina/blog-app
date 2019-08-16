@@ -4,7 +4,7 @@ class PostsCounter extends React.Component {
     render() {
         const { postsCount } = this.props;
 
-        return postsCount ? <div>Posts amount: {this.props.postsCount}</div> : "No posts";
+        return postsCount ? `Posts amount: ${this.props.postsCount}` : "No posts";
     }
 }
 
