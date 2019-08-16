@@ -1,0 +1,19 @@
+@import "../../../styles/settings.scss";
+
+.content-editor {
+    outline: none;
+    border: 4px dashed $color-editor-border-light;
+    max-width: $base-size * 40;
+    padding: $base-size * 2 $base-size;
+    font-family: $font-text;
+    transition: 0.2s;
+
+    p {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.content-editor:hover {
+    border: 4px dashed $color-editor-border;
+}
