@@ -4,6 +4,7 @@ import Spinner from "../../common/Spinner/Spinner";
 import Alert from "../../common/Alert/Alert";
 import PageTitle from "../../common/PageTitle/PageTitle";
 import HtmlBox from "../../common/htmlBox/HtmlBox";
+import Author from "../author/Author";
 
 class SinglePost extends React.Component {
     componentDidMount() {
@@ -14,7 +15,7 @@ class SinglePost extends React.Component {
     render() {
         const { post, request } = this.props;
         const { pending, success, error } = request;
-        const { title, content } = post;
+        const { title, content, author } = post;
 
         if (pending || success === null) {
             return <Spinner />;
@@ -22,6 +23,7 @@ class SinglePost extends React.Component {
             return (
                 <div>
                     <PageTitle>{title}</PageTitle>
+                    <Author name={author} />
                     <HtmlBox>{content}</HtmlBox>
                 </div>
             );
@@ -35,7 +37,8 @@ SinglePost.propTypes = {
     post: PropTypes.shape({
         id: PropTypes.string,
         title: PropTypes.string,
-        content: PropTypes.string
+        content: PropTypes.string,
+        author: PropTypes.string
     }),
     request: PropTypes.shape({
         pending: PropTypes.bool,
