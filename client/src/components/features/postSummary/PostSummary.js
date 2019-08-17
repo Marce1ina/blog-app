@@ -5,17 +5,17 @@ import HtmlBox from "../../common/htmlBox/HtmlBox";
 import { cutText } from "../../../utils/string";
 import Button from "../../common/Button/Button";
 import SmallTitle from "../../common/SmallTitle/SmallTitle";
-import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const PostSummary = withRouter(({ history, title, content, id }) => (
+const PostSummary = ({ title, content, id }) => (
     <article className="post-summary">
         <SmallTitle>{title}</SmallTitle>
         <HtmlBox>{cutText(content, 250)}</HtmlBox>
-        <Button onClick={() => history.push(`posts/${id}`)} variant="primary">
-            Read more
-        </Button>
+        <Link to={`/posts/${id}`}>
+            <Button variant="primary">Read more</Button>
+        </Link>
     </article>
-));
+);
 
 PostSummary.propTypes = {
     id: PropTypes.string,
