@@ -15,7 +15,7 @@ app.use(helmet());
 
 app.use("/api", postRoutes);
 
-mongoose.connect(config.DB, { useNewUrlParser: true });
+mongoose.connect(config.DB, { useNewUrlParser: true, useFindAndModify: false });
 let db = mongoose.connection;
 
 db.once("open", () => {

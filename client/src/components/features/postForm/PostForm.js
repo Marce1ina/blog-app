@@ -21,6 +21,23 @@ class PostForm extends React.Component {
         }
     };
 
+    isPostEdition = () => !!this.props.postId;
+
+    async componentDidMount() {
+        if (this.isPostEdition()) {
+            const { postId, loadSinglePost, resetRequestState } = this.props;
+            await loadSinglePost(postId);
+            resetRequestState();
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.post !== this.props.post)
+            this.setState((state, props) => ({
+                post: props.post
+            }));
+    }
+
     componentWillUnmount() {
         const { resetRequestState } = this.props;
         resetRequestState();
@@ -46,11 +63,12 @@ class PostForm extends React.Component {
 
     render() {
         const { post } = this.state;
-        const { handleChange, handleEditor, addPost } = this;
+        const { handleChange, handleEditor, addPost, isPostEdition } = this;
         const { request } = this.props;
 
         if (request.error) return <Alert variant="error">{request.error}</Alert>;
-        else if (request.success) return <Alert variant="success">Post has been added!</Alert>;
+        else if (request.success)
+            return <Alert variant="success">{`Post has been ${isPostEdition() ? "updated" : "added"}!`}</Alert>;
         else if (request.pending) return <Spinner />;
         else
             return (
@@ -71,7 +89,7 @@ class PostForm extends React.Component {
                         }}
                     />
 
-                    <Button variant="primary">Add post</Button>
+                    <Button variant="primary">{isPostEdition() ? "Update post" : "Add post"}</Button>
                 </form>
             );
     }

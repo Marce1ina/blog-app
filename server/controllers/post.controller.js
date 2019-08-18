@@ -20,11 +20,22 @@ exports.getSinglePost = async (req, res) => {
 
 exports.addPost = async function(req, res) {
     try {
-        let newPost = new Post(req.body);
-        newPost.id = uuid();
+        const { body } = req;
 
-        postSaved = await newPost.save();
-        res.status(200).json(postSaved);
+        if (body.id) {
+            let filter = { id: body.id };
+
+            await Post.findOneAndUpdate(filter, body);
+
+            let updatedPost = await Post.findOne(filter);
+            res.status(200).json(updatedPost);
+        } else {
+            let newPost = new Post(body);
+            newPost.id = uuid();
+
+            postSaved = await newPost.save();
+            res.status(200).json(postSaved);
+        }
     } catch (err) {
         res.status(500).json(err);
     }
