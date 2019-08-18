@@ -11,8 +11,17 @@ exports.getPosts = async (req, res) => {
 
 exports.getSinglePost = async (req, res) => {
     try {
-        let post = await Post.findOne({ id: req.params.id });
-        post ? res.status(200).json(post) : res.status(404).send("Post not found");
+        let id = req.params.id;
+
+        if (id === "random") {
+            let documentsCount = await Post.countDocuments();
+            const random = Math.floor(Math.random() * documentsCount);
+
+            res.status(200).json(await Post.findOne().skip(random));
+        } else {
+            let post = await Post.findOne({ id });
+            post ? res.status(200).json(post) : res.status(404).send("Post not found");
+        }
     } catch (err) {
         res.status(500).json(err);
     }
