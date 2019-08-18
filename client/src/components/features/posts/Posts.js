@@ -10,6 +10,11 @@ class Posts extends React.Component {
         loadPosts();
     }
 
+    componentWillUnmount() {
+        const { resetRequestState } = this.props;
+        resetRequestState();
+    }
+
     render() {
         const { posts, postsCount, request } = this.props;
         const { pending, success, error } = request;

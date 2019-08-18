@@ -1,9 +1,12 @@
 import React from "react";
+import PostForm from "../../features/postForm/PostFormContainer";
+import PageTitle from "../../common/PageTitle/PageTitle";
 
 const NewPostPage = () => (
-    <div>
-        <h1>Add new post</h1>
-    </div>
+    <>
+        <PageTitle>Add post</PageTitle>
+        <PostForm />
+    </>
 );
 
 export default NewPostPage;

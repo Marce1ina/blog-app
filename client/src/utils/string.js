@@ -8,3 +8,5 @@ export const cutText = (text, maxLength) => {
     }
     return "Error";
 };
+
+export const removeHtmlTags = str => str.replace(/<\/?[^>]+(>|$)/g, "");

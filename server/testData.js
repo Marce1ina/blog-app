@@ -19,6 +19,7 @@ const loadTestData = async () => {
     ];
 
     try {
+        // await Post.remove({});
         let counter = await Post.countDocuments();
         if (counter === 0) {
             console.log("No posts. Loading data...");

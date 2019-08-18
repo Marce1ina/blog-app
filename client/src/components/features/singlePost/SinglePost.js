@@ -12,6 +12,11 @@ class SinglePost extends React.Component {
         loadPost(postId);
     }
 
+    componentWillUnmount() {
+        const { resetRequestState } = this.props;
+        resetRequestState();
+    }
+
     render() {
         const { post, request } = this.props;
         const { pending, success, error } = request;
