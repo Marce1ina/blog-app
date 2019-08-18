@@ -19,7 +19,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    loadPostsByPage: page => dispatch(loadPostsByPageRequest(page)),
+    loadPostsByPage: (postsPerPage, page) => dispatch(loadPostsByPageRequest(postsPerPage, page)),
     resetRequestState: () => dispatch(resetRequest())
 });
 

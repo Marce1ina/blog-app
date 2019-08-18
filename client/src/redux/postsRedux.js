@@ -51,7 +51,7 @@ export const loadPostsByPage = payload => ({ payload, type: LOAD_POSTS_PAGE });
 export default function reducer(statePart = initialState, action = {}) {
     switch (action.type) {
         case LOAD_POSTS:
-            return { ...statePart, data: action.payload };
+            return { ...statePart, data: action.payload, amount: action.payload.length };
         case LOAD_SINGLE_POST:
             return { ...statePart, singlePost: action.payload };
         case START_REQUEST:
@@ -115,12 +115,10 @@ export const addPostRequest = post => {
     };
 };
 
-export const loadPostsByPageRequest = page => {
+export const loadPostsByPageRequest = (postsPerPage, page) => {
     return async dispatch => {
         dispatch(startRequest());
         try {
-            const postsPerPage = 10;
-
             const startAt = (page - 1) * postsPerPage;
             const limit = postsPerPage;
 

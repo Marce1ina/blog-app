@@ -4,9 +4,7 @@ import PropTypes from "prop-types";
 import "./Pagination.scss";
 
 class Pagination extends React.Component {
-    state = {
-        presentPage: this.props.initialPage
-    };
+    getPresentPage = () => this.props.presentPage || 1;
 
     changePage = async newPage => {
         const { onPageChange } = this.props;
@@ -16,8 +14,9 @@ class Pagination extends React.Component {
 
     render() {
         const { pages } = this.props;
-        const { presentPage } = this.state;
-        const { changePage } = this;
+        const { changePage, getPresentPage } = this;
+        const presentPage = getPresentPage();
+
         return (
             <div className="pagination">
                 <ul className="pagination__list">
@@ -47,7 +46,7 @@ class Pagination extends React.Component {
                     ))}
                     {presentPage < pages && (
                         <li
-                            key="prev"
+                            key="next"
                             onClick={() => {
                                 changePage(presentPage + 1);
                             }}

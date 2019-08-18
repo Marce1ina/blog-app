@@ -7,8 +7,8 @@ import Pagination from "../../common/Pagination/Pagination";
 
 class Posts extends React.Component {
     componentDidMount() {
-        const { loadPostsByPage } = this.props;
-        loadPostsByPage(1);
+        const { presentPage, loadPostsByPage, postsPerPage } = this.props;
+        loadPostsByPage(postsPerPage, presentPage);
     }
 
     componentWillUnmount() {
@@ -17,12 +17,12 @@ class Posts extends React.Component {
     }
 
     loadPostsPage = page => {
-        const { loadPostsByPage } = this.props;
-        loadPostsByPage(page);
+        const { loadPostsByPage, postsPerPage } = this.props;
+        loadPostsByPage(postsPerPage, page);
     };
 
     render() {
-        const { posts, postsCount, request, pages, presentPage } = this.props;
+        const { posts, postsCount, request, pages, presentPage, pagination } = this.props;
         const { pending, success, error } = request;
         const { loadPostsPage } = this;
 
@@ -32,7 +32,7 @@ class Posts extends React.Component {
             return (
                 <>
                     <PostsList posts={posts} />
-                    <Pagination pages={pages} onPageChange={loadPostsPage} initialPage={presentPage} />
+                    {pagination && <Pagination pages={pages} onPageChange={loadPostsPage} presentPage={presentPage} />}
                 </>
             );
         } else if (!pending && success && !postsCount) {
@@ -41,6 +41,12 @@ class Posts extends React.Component {
             return <Alert variant="error">{error}</Alert>;
         }
     }
+
+    static defaultProps = {
+        initialPage: 1,
+        postsPerPage: 10,
+        pagination: true
+    };
 }
 
 Posts.propTypes = {
@@ -60,7 +66,10 @@ Posts.propTypes = {
         error: PropTypes.string,
         success: PropTypes.bool
     }),
-    pages: PropTypes.number
+    pages: PropTypes.number,
+    presentPage: PropTypes.number,
+    postsPerPage: PropTypes.number,
+    pagination: PropTypes.bool
 };
 
 export default Posts;
