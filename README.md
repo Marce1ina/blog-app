@@ -1,4 +1,4 @@
-#blog-app
+# blog-app
 Full-stack blog app in JS. Up and running with "yarn start".
 
 ![image](https://user-images.githubusercontent.com/36503817/73485906-4afccb00-43a4-11ea-88fa-56e9380c1f8d.png)
